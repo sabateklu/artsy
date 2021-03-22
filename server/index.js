@@ -1,8 +1,11 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
-const api = require('./artsy.config.js');
+var passwordHash = require('password-hash');
 
+
+const api = require('./artsy.config.js');
+//var hashedPassword = passwordHash.generate('password123');
 const port = 3000 || process.env.PORT;
 
 app.get('/', (req, res) => {
@@ -13,7 +16,9 @@ app.get('/', (req, res) => {
     artPieces.forEach((objectId) => {
       axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`)
       .then((response) => {
-        res.send(response.data);
+        if(response.data.primaryImage.length > 0) {
+          //establish database to store images and what information about the image you want to store
+        };
       })
     })
   })
