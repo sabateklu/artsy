@@ -2,7 +2,8 @@ var mysql = require('mysql');
 
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'root'
+  user     : 'root',
+  database : 'art'
 });
 
 connection.connect((err) => {

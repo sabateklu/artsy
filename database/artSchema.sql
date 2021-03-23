@@ -6,8 +6,8 @@ USE art;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS art;
-DROP TABLE IF EXISTS artists;
 DROP TABLE IF EXISTS userfavs;
+DROP TABLE IF EXISTS search;
 
 CREATE TABLE users (
   userid INT NOT NULL AUTO_INCREMENT,
@@ -17,7 +17,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE art (
-  artid INT NOT NULL AUTO_INCREMENT,
+  objectid INT NOT NULL,
   primaryImage VARCHAR(200),
   department VARCHAR(150),
   title VARCHAR(500),
@@ -28,12 +28,18 @@ CREATE TABLE art (
   country VARCHAR(200),
   artist VARCHAR(200),
   artistBio VARCHAR(1000),
-  PRIMARY KEY (artid)
+  PRIMARY KEY (objectid)
 );
 
 CREATE TABLE userfavs (
   userid INT NOT NULL,
-  artid INT NOT NULL,
+  objectid INT NOT NULL,
   FOREIGN KEY (userid) REFERENCES users(userid),
-  FOREIGN KEY (artid) REFERENCES art(artid)
-)
+  FOREIGN KEY (objectid) REFERENCES art(objectid)
+);
+
+CREATE TABLE search (
+  objectid INT NOT NULL,
+  term VARCHAR(500) NOT NULL,
+  FOREIGN KEY (objectid) REFERENCES art(objectid)
+);
