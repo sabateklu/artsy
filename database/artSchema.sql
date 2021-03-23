@@ -7,7 +7,6 @@ USE art;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS art;
 DROP TABLE IF EXISTS userfavs;
-DROP TABLE IF EXISTS search;
 
 CREATE TABLE users (
   userid INT NOT NULL AUTO_INCREMENT,
@@ -35,11 +34,5 @@ CREATE TABLE userfavs (
   userid INT NOT NULL,
   objectid INT NOT NULL,
   FOREIGN KEY (userid) REFERENCES users(userid),
-  FOREIGN KEY (objectid) REFERENCES art(objectid)
-);
-
-CREATE TABLE search (
-  objectid INT NOT NULL,
-  term VARCHAR(500) NOT NULL,
   FOREIGN KEY (objectid) REFERENCES art(objectid)
 );
