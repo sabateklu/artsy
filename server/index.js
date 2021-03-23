@@ -1,16 +1,22 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
-var passwordHash = require('password-hash');
-const db = require('../database/index.js')
-let connection = db.connection
+const passwordHash = require('password-hash');
 //const api = require('./artsy.config.js');
 //var hashedPassword = passwordHash.generate('password123');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const db = require('../database/index.js')
+
+let connection = db.connection
 const port = 3000 || process.env.PORT;
 
-// app.use('/', ()=> {
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
 
-// })
+app.use('/', express.static('./dist', {
+  index: "index.html"
+}))
 
 app.get('/api/search', (req, res) => {
   let search = req.query.searchTerm || 'rodents';
