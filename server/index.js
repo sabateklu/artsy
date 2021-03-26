@@ -66,7 +66,11 @@ app.get('/api/login', (req, res) => {
 app.post('/api/save', (req, res) => {
   // save favorite adventure to users profile
   // this request is only available to users who are logged in
-})
+});
+
+app.get('/api/favorite', (req, res) => {
+  // get users favorites
+});
 
 */
 
