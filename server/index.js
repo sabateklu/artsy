@@ -54,6 +54,22 @@ app.get('/api/search', (req, res) => {
   })
 })
 
+/*
+app.post('/api/login', (req, res) => {
+  // create new login
+});
+
+app.get('/api/login', (req, res) => {
+  // validate login
+});
+
+app.post('/api/save', (req, res) => {
+  // save favorite adventure to users profile
+  // this request is only available to users who are logged in
+})
+
+*/
+
 app.listen(port, ()=> {
   console.log(`listening on ${port}`)
 })
