@@ -19,13 +19,15 @@ app.use('/', express.static('./dist', {
 }))
 
 app.get('/api/search', (req, res) => {
+
   let search = req.query.searchTerm || 'rodents';
+  console.log(search);
   let artPiecesObjectIds;
   let collection = [];
 
   axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${search}`)
   .then(async (results) => {
-    artPiecesObjectIds = results.data.objectIDs;
+    artPiecesObjectIds = results.data.objectIDs.slice(0, 50);
     for (const objectId of artPiecesObjectIds) {
       await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`)
       .then((response) => {
@@ -43,6 +45,7 @@ app.get('/api/search', (req, res) => {
             artist: response.data.artistDisplayName.replace(/"/g, ""),
             artistBio: response.data.artistDisplayBio.replace(/"/g, "")
           };
+          console.log(piece);
           collection.push(piece);
         }
       })
